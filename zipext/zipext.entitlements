@@ -8,5 +8,7 @@
 	<array>
 		<string>group.com.yourname.zip.unique</string>
 	</array>
+	<key>com.apple.security.files.user-selected.read-write</key>
+	<true/>
 </dict>
 </plist>

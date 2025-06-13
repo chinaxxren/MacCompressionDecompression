@@ -1,8 +1,8 @@
 //
-//  FinderSync.swift
+//  findersync.swift
 //  zipext
 //
-//  Created by chinaxxren on 2025/6/12.
+//  由Chinaxxren于2025/6/12创建。
 //
 
 import Cocoa
@@ -10,11 +10,11 @@ import FinderSync
 import os.log
 
 private let logger = OSLog(subsystem: "com.yourcompany.zip.zipext", category: "FinderSync")
-private let appGroupID = "group.com.yourname.zip.unique" // IMPORTANT: MUST MATCH a group in Signing & Capabilities
+private let appGroupID = "group.com.yourname.zip.unique" // 重要：必须匹配签名和能力的小组
 
 class FinderSync: FIFinderSync {
 
-    // Use shared user defaults
+    // 使用共享用户默认值
     private var sharedUserDefaults: UserDefaults? {
         return UserDefaults(suiteName: appGroupID)
     }
@@ -24,36 +24,36 @@ class FinderSync: FIFinderSync {
         
         os_log("✅ FinderSync initialized.", log: logger, type: .debug)
         
-        // We are observing the user's home directory.
+        // 我们正在观察用户的主目录。
         FIFinderSyncController.default().directoryURLs = [URL(fileURLWithPath: NSHomeDirectory())]
         
         os_log("🚀 FinderSync launched from: %{public}@", log: logger, type: .debug, Bundle.main.bundlePath as NSString)
     }
     
-    // MARK: - Primary Finder Sync protocol methods
+    // 标记： -主要查找器同步协议方法
     
     override func beginObservingDirectory(at url: URL) {
-        // The user is now seeing the container's contents.
-        // If they see it in more than one view at a time, we're only told once.
+        // 用户现在看到容器的内容。
+        // 如果他们一次看到它一次以上的视图，我们只会告诉我们一次。
         os_log("beginObservingDirectoryAtURL: %{public}@", log: logger, type: .debug, url.path as NSString)
     }
     
     
     override func endObservingDirectory(at url: URL) {
-        // The user is no longer seeing the container's contents.
+        // 用户不再看到容器的内容。
         os_log("endObservingDirectoryAtURL: %{public}@", log: logger, type: .debug, url.path as NSString)
     }
     
     override func requestBadgeIdentifier(for url: URL) {
         os_log("requestBadgeIdentifierForURL: %{public}@", log: logger, type: .debug, url.path as NSString)
         
-        // For demonstration purposes, this picks one of our two badges, or no badge at all, based on the filename.
+        // 出于演示目的，这是根据文件名选择我们的两个徽章之一，或者根本没有徽章。
         let whichBadge = abs(url.path.hash) % 3
         let badgeIdentifier = ["", "One", "Two"][whichBadge]
         FIFinderSyncController.default().setBadgeIdentifier(badgeIdentifier, for: url)
     }
     
-    // MARK: - Menu and toolbar item support
+    // 标记： -菜单和工具栏项目支持
     
     override func menu(for menuKind: FIMenuKind) -> NSMenu? {
         os_log("➡️ menu(for:) called.", log: logger, type: .debug)
@@ -72,10 +72,10 @@ class FinderSync: FIFinderSync {
         
         let menu = NSMenu(title: "")
 
-        // We only want to add a menu to the contextual menu for selected items.
+        // 我们只想将菜单添加到所选项目的上下文菜单中。
         guard menuKind == .contextualMenuForItems else {
             os_log("❌ Guard failed: menuKind is not .contextualMenuForItems. Returning nil.", log: logger, type: .debug)
-            // For debugging, let's return a disabled item to show the extension is alive.
+            // 对于调试，让我们返回一个残疾项目以显示扩展名还活着。
             let item = NSMenuItem(title: "无可用操作", action: nil, keyEquivalent: "")
             item.isEnabled = false
             menu.addItem(item)
@@ -85,7 +85,7 @@ class FinderSync: FIFinderSync {
         let selectedItems = FIFinderSyncController.default().selectedItemURLs() ?? []
         os_log("   %d items selected.", log: logger, type: .debug, selectedItems.count)
         
-        // Show decompression options if a single archive file is selected.
+        // 如果选择了单个存档文件，请显示解压缩选项。
         if selectedItems.count == 1,
            let firstItem = selectedItems.first,
            isArchiveFile(firstItem) {
@@ -103,10 +103,10 @@ class FinderSync: FIFinderSync {
             menu.addItem(extractToNewFolderMenuItem)
             
         } else if !selectedItems.isEmpty {
-            // Otherwise, show compression options.
+            // 否则，显示压缩选项。
             let compressMenu = NSMenu(title: "压缩")
             
-            // Common formats
+            // 普通格式
             let formats: [(title: String, type: String, shortcut: String)] = [
                 ("压缩为 ZIP", "zip", "z"),
                 ("压缩为 7Z", "7z", "7"),
@@ -124,7 +124,7 @@ class FinderSync: FIFinderSync {
             
             compressMenu.addItem(NSMenuItem.separator())
             
-            // Compression level submenu
+            // 压缩水平子菜单
             let levelMenu = NSMenu(title: "压缩级别")
             let levels = [(title: "低（较快）", level: "low"),
                          (title: "中（默认）", level: "normal"),
@@ -146,7 +146,7 @@ class FinderSync: FIFinderSync {
             levelMenuItem.submenu = levelMenu
             compressMenu.addItem(levelMenuItem)
             
-            // Password protection option
+            // 密码保护选项
             let passwordItem = NSMenuItem(title: "添加密码",
                                         action: #selector(togglePasswordProtection(_:)),
                                         keyEquivalent: "p")
@@ -173,7 +173,7 @@ class FinderSync: FIFinderSync {
         return supportedExtensions.contains(url.pathExtension.lowercased())
     }
     
-    // MARK: - Actions
+    // 标记： -动作
     
     @objc func compress(_ sender: NSMenuItem) {
         guard let type = sender.representedObject as? String else { return }
@@ -202,7 +202,7 @@ class FinderSync: FIFinderSync {
         sharedUserDefaults?.set(sender.state == .on, forKey: "UsePassword")
     }
     
-    // MARK: - Communication with Main App
+    // 标记： -与主应用的通信
     
     private func communicateWithMainApp(action: String, type: String? = nil, createNewFolder: Bool? = nil) {
         guard let items = FIFinderSyncController.default().selectedItemURLs() else {
