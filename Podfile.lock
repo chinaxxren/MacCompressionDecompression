@@ -1,0 +1,31 @@
+PODS:
+  - PLzmaSDK (1.5.0):
+    - PLzmaSDK/libplzma (= 1.5.0)
+    - PLzmaSDK/Swift (= 1.5.0)
+  - PLzmaSDK/libplzma (1.5.0)
+  - PLzmaSDK/Swift (1.5.0):
+    - PLzmaSDK/libplzma
+  - SSZipArchive (2.6.0)
+  - UnrarKit (2.10):
+    - UnrarKit/unrar-lib (= 2.10)
+  - UnrarKit/unrar-lib (2.10)
+
+DEPENDENCIES:
+  - PLzmaSDK
+  - SSZipArchive
+  - UnrarKit
+
+SPEC REPOS:
+  trunk:
+    - PLzmaSDK
+    - SSZipArchive
+    - UnrarKit
+
+SPEC CHECKSUMS:
+  PLzmaSDK: 132503584f021b65c15591c2ba908393b58a9860
+  SSZipArchive: 8a6ee5677c8e304bebc109e39cf0da91ccef22ea
+  UnrarKit: 62f535c7a34ec52d2514b9b148f33dcfa9a9dc39
+
+PODFILE CHECKSUM: 9e6f63fc3044460579c824b32cb1453dfe64cab8
+
+COCOAPODS: 1.16.2

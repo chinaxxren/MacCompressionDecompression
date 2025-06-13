@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeIconFile</key>
+			<string>zip</string>
+			<key>CFBundleTypeName</key>
+			<string>ZIP Archive</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.yourcompany.zip</string>
+				<string>public.zip-archive</string>
+				<string>com.pkware.zip-archive</string>
+				<string>public.archive</string>
+				<string>public.item</string>
+			</array>
+		</dict>
+	</array>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.xxx.zip</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>zipapp</string>
+			</array>
+		</dict>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.developer-tools</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
+	<key>NSAppleEventsUsageDescription</key>
+	<string>This app needs to control Finder to perform file operations.</string>
+	<key>NSDesktopFolderUsageDescription</key>
+	<string>This app needs access to the Desktop folder to process files.</string>
+	<key>NSDocumentsFolderUsageDescription</key>
+	<string>This app needs access to the Documents folder to process files.</string>
+	<key>NSDownloadsFolderUsageDescription</key>
+	<string>This app needs access to the Downloads folder to process files.</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright © 2024. All rights reserved.</string>
+	<key>NSPreferencesUsageDescription</key>
+	<string>This app needs access to preferences to save your settings.</string>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+	<key>NSServices</key>
+	<array>
+		<dict/>
+	</array>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+				<string>public.archive</string>
+				<string>public.item</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>ZIP Archive</string>
+			<key>UTTypeIconFile</key>
+			<string>zip</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.yourcompany.zip</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>zip</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>application/zip</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>
